@@ -45,4 +45,22 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
+})
+
+
+.controller("PlayerCtrl", function($scope, $cordovaMedia, $ionicLoading) {
+
+  $scope.play = function(src) {
+    var media = new Media(src, null, null, mediaStatusCallback);
+    $cordovaMedia.play(media);
+  }
+
+  var mediaStatusCallback = function(status) {
+    if(status == 1) {
+      $ionicLoading.show({template: 'Loading...'});
+    } else {
+      $ionicLoading.hide();
+    }
+  }
+
 });
